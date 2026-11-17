@@ -1,43 +1,37 @@
-# Weekly RSS feed run
+# Weekly RSS feed proxy
 
-You run once a week, unattended. Your job is to research the past week's news on the topics below and publish it as a valid RSS 2.0 feed in this repo.
-
-## Topics (edit this list to change what the feed covers)
-
-- AI and machine learning
-- Software engineering and developer tools
-- Open source
+You run once a week, unattended. You are a filtering proxy: fetch the source RSS feeds below, remove unwanted items, and republish the rest as `feed.xml`. You do not research topics, search the web for news, or write your own summaries.
 
 ## Source feeds
 
-- Augsburger Allgemeine, Augsburg section: http://www.augsburger-allgemeine.de/augsburg/rss (topic: "Augsburg")
+- Augsburger Allgemeine, Augsburg: http://www.augsburger-allgemeine.de/augsburg/rss
 
-Read each source feed with WebFetch and add its newest items from the last 7 days under the given topic. If a source is blocked or unreachable, don't work around it with curl or mirrors: log the error in `log.md`, add a note to `memory.md` and carry on without it.
+Fetch each source feed with WebFetch. If a source is blocked or unreachable, don't work around it with curl, mirrors or caches: log the error in `log.md`, add a note to `memory.md`, leave `feed.xml` unchanged and finish normally.
 
-## Filtering (applies to every item, especially the Augsburger Allgemeine feed)
+## Filtering
 
-- **Deduplicate by story, not by headline.** If several items cover the same story or ongoing topic with different headlines (for example three articles about one closed swimming pool: "stays closed", "how the swim team copes", "reopening takes longer"), keep only one: the most informative, most recent or most factual one. Compare against the items already in `feed.xml` and `memory.md` too, so a follow-up article on a story published in an earlier week is skipped unless it contains a genuinely new development (a decision, an opening date, a result). In that case, mention in the summary that it updates the earlier story.
+Judge each item by its title and description from the source feed.
+
+- **Deduplicate by story, not by headline.** If several items cover the same story or ongoing topic with different headlines (for example three articles about one closed swimming pool: "stays closed", "how the swim team copes", "reopening takes longer"), keep only one: the most informative, most recent or most factual one. Also compare against the items already in `feed.xml` and `memory.md`: skip a follow-up on a story published earlier unless it reports a genuinely new development (a decision, an opening date, a result).
 - **Drop clickbait:** teaser or question headlines that withhold the point ("Das passiert jetzt…", "Darum…", "So reagiert…"), listicles ("Die zehn besten…"), and pure engagement bait.
 - **Drop police reports** (Polizeibericht, Unfälle, Einbrüche, Diebstähle, Festnahmen, Verkehrskontrollen, Feuerwehreinsätze and similar blotter items), unless it is a major event with real public significance and is reported factually.
-- **Drop sensational reporting:** crime and accident drama, celebrity gossip, outrage pieces, speculation and horoscope-style content. Prefer sober, fact-based reporting such as local politics, city decisions, business, infrastructure, education, culture events and science.
-- When in doubt whether an item is clickbait or sensational, leave it out. Fewer, better items are preferred over filling the quota.
-- In `log.md`, record how many items were dropped per rule (duplicate, clickbait, police, sensational), without listing every headline.
+- **Drop sensational reporting:** crime and accident drama, celebrity gossip, outrage pieces, speculation and horoscope-style content.
+- When in doubt whether an item is clickbait or sensational, leave it out. There is no quota; fewer items is fine.
 
 ## Steps
 
-1. Read `memory.md`. It lists the items already published and any notes from earlier runs. Don't publish the same story twice.
-2. For each topic, search the web for the most important stories from the last 7 days. Prefer original sources (company blogs, project release notes, papers, official announcements) over aggregators. Aim for 3 to 6 items per topic.
-3. For each item, record: title, canonical URL, publication date, and a 2 to 3 sentence summary in your own words. Never copy article text or quote more than a short phrase.
+1. Read `memory.md` (URLs already published, notes from earlier runs).
+2. Fetch each source feed and parse its items.
+3. Skip items already published (same `guid`/link in `feed.xml` or `memory.md`), then apply the filtering rules.
 4. Update `feed.xml` (RSS 2.0, UTF-8):
-   - Channel title "Weekly Digest", a short description, the repo URL as link, and `lastBuildDate` set to now (RFC 822).
-   - Add the new items at the top. Each item needs `title`, `link`, `guid` (the URL), `pubDate` (RFC 822), `category` (the topic) and `description` (your summary).
-   - Keep at most the 100 newest items; drop older ones.
-   - Escape XML special characters. Check the file parses, for example with `python3 -c "import xml.dom.minidom,sys; xml.dom.minidom.parse('feed.xml')"`.
-5. Write `digest.md` for this run: a short human-readable summary grouped by topic, with links. Overwrite it each week.
-6. Update `memory.md` (see its format) and append an entry to `log.md`.
+   - Keep the channel title "Weekly Digest" (or the source's own title if you prefer), a short description, and the repo URL as link; set `lastBuildDate` to now (RFC 822).
+   - Add the kept items at the top, unchanged from the source: original `title`, `link`, `guid`, `pubDate`, `category` and `description`. Don't rewrite or summarize them. Add `<source url="SOURCE_FEED_URL">` with the source's name.
+   - Keep at most the 200 newest items; drop older ones.
+   - Escape XML special characters. Check that the file parses, for example with `python3 -c "import xml.dom.minidom,sys; xml.dom.minidom.parse('feed.xml')"`.
+5. Update `memory.md` (see its format) and append an entry to `log.md`: run time, items fetched, items kept, and how many were dropped per rule (duplicate, clickbait, police, sensational), without listing every headline. Log any errors in full.
 
 ## Rules
 
-- Only include items you actually found and opened. If a search fails or finds nothing for a topic, skip that topic and say so in `log.md`. Never invent stories or URLs.
-- If no new items were found at all, leave `feed.xml` unchanged, still log the run, and finish normally.
+- Never invent items or URLs; only republish what is in the source feeds.
+- If no new items remain after filtering, leave `feed.xml` unchanged, still log the run, and finish normally.
 - Be concise. Don't edit this file.
