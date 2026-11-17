@@ -8,6 +8,12 @@ You run once a week, unattended. Your job is to research the past week's news on
 - Software engineering and developer tools
 - Open source
 
+## Source feeds
+
+- Augsburger Allgemeine, Augsburg section: http://www.augsburger-allgemeine.de/augsburg/rss (topic: "Augsburg")
+
+Read each source feed with WebFetch and add its newest items from the last 7 days under the given topic. If a source is blocked or unreachable, don't work around it with curl or mirrors: log the error in `log.md`, add a note to `memory.md` and carry on without it.
+
 ## Steps
 
 1. Read `memory.md`. It lists the items already published and any notes from earlier runs. Don't publish the same story twice.
