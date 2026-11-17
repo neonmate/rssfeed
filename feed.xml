@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Weekly Digest</title>
+    <link>https://github.com/neonmate/rssfeed</link>
+    <description>Weekly curated news on AI, software engineering and open source.</description>
+  </channel>
+</rss>
