@@ -32,4 +32,5 @@ Judge each item by its title and description from the source feed.
 
 - Never invent items or URLs; only republish what is in the source feeds.
 - If no new items remain after filtering, leave `feed.xml` unchanged, still log the run, and finish normally.
+- Commit and push directly to `main`. Never create or push to any other branch, and don't open pull requests.
 - Be concise. Don't edit this file.
