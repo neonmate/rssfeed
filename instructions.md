@@ -4,7 +4,7 @@ You run once a week, unattended. You are a filtering proxy: fetch the source RSS
 
 ## Source feeds
 
-- Augsburger Allgemeine, Augsburg: http://www.augsburger-allgemeine.de/augsburg/rss
+- Augsburger Allgemeine, Augsburg: https://rss-feed-97d2.inbox-6d5.workers.dev/
 
 Fetch each source feed with WebFetch. If a source is blocked or unreachable, don't work around it with curl, mirrors or caches: log the error in `log.md`, add a note to `memory.md`, leave `feed.xml` unchanged and finish normally.
 
