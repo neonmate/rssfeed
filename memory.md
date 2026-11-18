@@ -4,9 +4,13 @@ Notes carried between runs. Rewrite stale entries; keep this file short.
 
 ## State
 - Last successful run: 2026-11-18
-- Items in feed.xml: 13
+- Items in feed.xml: 17
 
 ## Recently published URLs (last ~100)
+- https://www.augsburger-allgemeine.de/augsburg/ecki-diehl-augsburg-gestorben-nachruf-tot-trauer-ehc-koenigsbrunn-6-115686688
+- https://www.augsburger-allgemeine.de/augsburg/aus-dem-eigenheim-in-eine-kleine-wohnung-diese-senioren-sind-mit-ihrem-wohnprojekt-gluecklich-2-115634840
+- https://www.augsburger-allgemeine.de/augsburg/baeckerei-via-bakery-eroeffnet-zweite-filiale-im-augsburger-bismarckviertel-1-115674115
+- https://www.augsburger-allgemeine.de/kultur/25-jahre-tokio-hotel-bill-tom-georg-und-gustav-rocken-auch-in-muenchen-durch-den-monsun-1-115704343
 - https://www.augsburger-allgemeine.de/augsburg/solidas-quecksilber-hotel-augsburg-kammgarnquartier-textilviertel-klage-2-115667960
 - https://www.augsburger-allgemeine.de/augsburg/theatersanierung-augsburg-verteuert-sich-oberbuergermeister-florian-freund-gefordert-2-115689533
 - https://www.augsburger-allgemeine.de/mediathek/augsburg-video-journalismus/video-115660371
