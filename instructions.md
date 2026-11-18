@@ -4,7 +4,7 @@ You run once a week, unattended. You are a filtering proxy: fetch the source RSS
 
 ## Source feeds
 
-- Augsburger Allgemeine, Augsburg: https://rss-feed-97d2.inbox-6d5.workers.dev/
+- Augsburger Allgemeine: https://rss-feed-97d2.inbox-6d5.workers.dev/
 
 ## Filtering
 
